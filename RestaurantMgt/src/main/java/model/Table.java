@@ -13,11 +13,11 @@ import javax.persistence.*;
  *
  * @author Nick
  */
-@Entity
+@Entity(name="[Table]")
 public class Table {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tableId;
     private String name;
     private boolean isFree;
@@ -56,7 +56,5 @@ public class Table {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
-    
-    
 
 }

@@ -5,8 +5,8 @@
  */
 package model;
 
+import java.sql.Date;
 import javax.persistence.*;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -15,68 +15,39 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 @Entity
 public class OrderDetail {
 
-    @Id
-    private int orderId;
-    @Id
-    private int menuId;
-    @Id
-    private int tableId;
-
-    private DateTime starttime;
-    private DateTime endTime;
+    @EmbeddedId
+    private OrderDetailKey orderDetailKey;
+    private Date starttime;
+    private Date endTime;
     private int quantity;
     private double price;
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "orderId")
+    @PrimaryKeyJoinColumn(name = "orderId", referencedColumnName = "orderId")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "menuId")
+    @PrimaryKeyJoinColumn(name = "menuId", referencedColumnName = "menuId")
     private Menu menu;
 
     @ManyToOne
-    @JoinColumn(name = "tableId")
+    @PrimaryKeyJoinColumn(name = "tableId", referencedColumnName = "tableId")
     private model.Table table;
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public int getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(int menuId) {
-        this.menuId = menuId;
-    }
-
-    public int getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
-    }
-
-    public DateTime getStarttime() {
+    public Date getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(DateTime starttime) {
+    public void setStarttime(Date starttime) {
         this.starttime = starttime;
     }
 
-    public DateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(DateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -126,6 +97,14 @@ public class OrderDetail {
 
     public void setTable(model.Table table) {
         this.table = table;
+    }
+
+    public OrderDetailKey getOrderDetailKey() {
+        return orderDetailKey;
+    }
+
+    public void setOrderDetailKey(OrderDetailKey orderDetailKey) {
+        this.orderDetailKey = orderDetailKey;
     }
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import model.Menu;
+import model.*;
 
 /**
  *
@@ -23,9 +24,12 @@ public class RestaurantMgTest {
     private static EntityManagerFactory factory;
 
     public static void main(String[] args) {
-        Menu mn = new Menu();
-        mn.setFoodName("Beef Steak");
-        mn.setPrice(10);
+//        Menu mn = new Menu();
+//        mn.setFoodName("Beef Steak");
+//        mn.setPrice(10);
+//        Order od = new Order();
+//        Table tb = new Table();
+        
        // mn.setDescription("Allow vouncher");
 
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -33,7 +37,7 @@ public class RestaurantMgTest {
 
         try {
             em.getTransaction().begin();
-            em.persist(mn);
+           // em.persist(mn);
 
             em.getTransaction().commit();
 

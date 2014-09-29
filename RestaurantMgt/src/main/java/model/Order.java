@@ -3,27 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
-
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
 
 /**
  *
  * @author Nick
  */
-@Entity
+@Entity(name="[Order]")
 public class Order {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
     private int totalQuantity;
-    private DateTime date;
-    
+    private Date date;
+
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
@@ -43,11 +42,11 @@ public class Order {
         this.totalQuantity = totalQuantity;
     }
 
-    public DateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -58,5 +57,5 @@ public class Order {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
-    
+
 }

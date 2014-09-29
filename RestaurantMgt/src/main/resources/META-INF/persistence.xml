@@ -3,6 +3,9 @@
   <persistence-unit name="RestaurantMgt_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>model.Menu</class>
+    <class>model.OrderDetail</class>
+    <class>model.Order</class>
+    <class>model.Table</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=RestaurantMgt"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
