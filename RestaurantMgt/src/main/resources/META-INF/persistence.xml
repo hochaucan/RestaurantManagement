@@ -10,6 +10,10 @@
     <class>model.EmployeeRole</class>
     <class>model.Customer</class>
     <class>model.FoodRevert</class>
+    <class>model.Reservation</class>
+    <class>model.Recipes</class>
+    <class>model.Store</class>
+    <class>model.Supplier</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=RestaurantMgt"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

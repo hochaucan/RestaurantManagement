@@ -30,12 +30,34 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<FoodRevert> foodReverts = new ArrayList<FoodRevert>();
 
+    @ManyToMany(mappedBy = "menus")
+    private List<Reservation> reserves = new ArrayList<Reservation>();
+
+    @OneToMany(mappedBy = "menu")
+    private List<Recipes> recipes = new ArrayList<Recipes>();
+
     public int getMenuId() {
         return menuId;
     }
 
+    public List<Recipes> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipes> recipes) {
+        this.recipes = recipes;
+    }
+
     public List<FoodRevert> getFoodReverts() {
         return foodReverts;
+    }
+
+    public List<Reservation> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<Reservation> reserves) {
+        this.reserves = reserves;
     }
 
     public void setFoodReverts(List<FoodRevert> foodReverts) {

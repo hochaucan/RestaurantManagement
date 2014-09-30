@@ -108,3 +108,11 @@ public class OrderDetail {
     }
 
 }
+
+@Embeddable
+class OrderDetailKey {
+
+    private int orderId;
+    private int menuId;
+    private int tableId;
+}
