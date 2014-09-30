@@ -27,8 +27,19 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 
+    @OneToMany(mappedBy = "menu")
+    private List<FoodRevert> foodReverts = new ArrayList<FoodRevert>();
+
     public int getMenuId() {
         return menuId;
+    }
+
+    public List<FoodRevert> getFoodReverts() {
+        return foodReverts;
+    }
+
+    public void setFoodReverts(List<FoodRevert> foodReverts) {
+        this.foodReverts = foodReverts;
     }
 
     public void setMenuId(int menuId) {
@@ -66,7 +77,5 @@ public class Menu {
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
-    
-    
 
 }
