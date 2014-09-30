@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>model.Menu</class>
     <class>model.OrderDetail</class>
-    <class>model.Order</class>
     <class>model.Table</class>
     <class>model.Employee</class>
     <class>model.EmployeeRole</class>
@@ -14,6 +13,9 @@
     <class>model.Recipes</class>
     <class>model.Store</class>
     <class>model.Supplier</class>
+    <class>model.Chef</class>
+    <class>model.CookingDetail</class>
+    <class>model.CustOrder</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=RestaurantMgt"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

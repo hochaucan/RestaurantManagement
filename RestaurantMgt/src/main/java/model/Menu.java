@@ -36,32 +36,11 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<Recipes> recipes = new ArrayList<Recipes>();
 
+    @OneToMany(mappedBy = "menu")
+    private List<CookingDetail> cookingDetails = new ArrayList<CookingDetail>();
+
     public int getMenuId() {
         return menuId;
-    }
-
-    public List<Recipes> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(List<Recipes> recipes) {
-        this.recipes = recipes;
-    }
-
-    public List<FoodRevert> getFoodReverts() {
-        return foodReverts;
-    }
-
-    public List<Reservation> getReserves() {
-        return reserves;
-    }
-
-    public void setReserves(List<Reservation> reserves) {
-        this.reserves = reserves;
-    }
-
-    public void setFoodReverts(List<FoodRevert> foodReverts) {
-        this.foodReverts = foodReverts;
     }
 
     public void setMenuId(int menuId) {
@@ -98,6 +77,38 @@ public class Menu {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public List<FoodRevert> getFoodReverts() {
+        return foodReverts;
+    }
+
+    public void setFoodReverts(List<FoodRevert> foodReverts) {
+        this.foodReverts = foodReverts;
+    }
+
+    public List<Reservation> getReserves() {
+        return reserves;
+    }
+
+    public void setReserves(List<Reservation> reserves) {
+        this.reserves = reserves;
+    }
+
+    public List<Recipes> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipes> recipes) {
+        this.recipes = recipes;
+    }
+
+    public List<CookingDetail> getCookingDetails() {
+        return cookingDetails;
+    }
+
+    public void setCookingDetails(List<CookingDetail> cookingDetails) {
+        this.cookingDetails = cookingDetails;
     }
 
 }

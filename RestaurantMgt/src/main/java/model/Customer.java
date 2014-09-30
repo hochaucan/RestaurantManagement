@@ -30,8 +30,19 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private List<FoodRevert> customers = new ArrayList<FoodRevert>();
 
+    @OneToMany(mappedBy = "customer")
+    private List<CustOrder> orders = new ArrayList<CustOrder>();
+
     public int getCustomerId() {
         return customerId;
+    }
+
+    public List<CustOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<CustOrder> orders) {
+        this.orders = orders;
     }
 
     public void setCustomerId(int customerId) {

@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -16,7 +18,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int employeeId;
     @Column(length = 50)
     private String userName;
     @Column(length = 50)
@@ -32,12 +34,15 @@ public class Employee {
     @JoinColumn(name = "ROLEID")
     private EmployeeRole userRole;
 
-    public int getUserId() {
-        return userId;
+    @OneToMany(mappedBy = "employee")
+    private List<CookingDetail> cookingDetails = new ArrayList<CookingDetail>();
+
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getUserName() {
@@ -86,6 +91,14 @@ public class Employee {
 
     public void setUserRole(EmployeeRole userRole) {
         this.userRole = userRole;
+    }
+
+    public List<CookingDetail> getCookingDetails() {
+        return cookingDetails;
+    }
+
+    public void setCookingDetails(List<CookingDetail> cookingDetails) {
+        this.cookingDetails = cookingDetails;
     }
 
 }

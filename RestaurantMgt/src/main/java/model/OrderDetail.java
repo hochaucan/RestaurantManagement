@@ -25,7 +25,7 @@ public class OrderDetail {
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "orderId", referencedColumnName = "orderId")
-    private Order order;
+    private CustOrder order;
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "menuId", referencedColumnName = "menuId")
@@ -75,11 +75,11 @@ public class OrderDetail {
         this.status = status;
     }
 
-    public Order getOrder() {
+    public CustOrder getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(CustOrder order) {
         this.order = order;
     }
 

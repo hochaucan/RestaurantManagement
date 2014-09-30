@@ -14,8 +14,8 @@ import javax.persistence.*;
  *
  * @author Nick
  */
-@Entity(name="[Order]")
-public class Order {
+@Entity
+public class CustOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,10 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "CUSTOMERID", referencedColumnName = "CUSTOMERID")
+    private Customer customer;
 
     public int getOrderId() {
         return orderId;
@@ -58,4 +62,13 @@ public class Order {
         this.orderDetails = orderDetails;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+   
 }

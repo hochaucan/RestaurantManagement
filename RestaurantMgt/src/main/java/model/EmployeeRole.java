@@ -24,7 +24,7 @@ public class EmployeeRole {
     private String description;
 
     @OneToMany(mappedBy = "userRole")
-    private List<Employee> users = new ArrayList<Employee>();
+    private List<Employee> employees = new ArrayList<Employee>();
 
     public int getRoleId() {
         return roleId;
@@ -50,14 +50,11 @@ public class EmployeeRole {
         this.description = description;
     }
 
-    public List<Employee> getUsers() {
-        return users;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setUsers(List<Employee> users) {
-        this.users = users;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
-
-   
-
 }
