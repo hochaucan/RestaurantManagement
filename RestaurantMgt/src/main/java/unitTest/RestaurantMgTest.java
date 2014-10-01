@@ -8,8 +8,10 @@ package unitTest;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import model.Menu;
 import model.*;
+import model.Menu;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -22,8 +24,14 @@ public class RestaurantMgTest {
      */
     private static final String PERSISTENCE_UNIT_NAME = "RestaurantMgt_jar_1.0-SNAPSHOTPU";
     private static EntityManagerFactory factory;
+    static final Logger logger = Logger.getLogger(RestaurantMgTest.class);
+    //static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(RestaurantMgTest.class);
 
     public static void main(String[] args) {
+        PropertyConfigurator.configure("log4j.properties");
+        logger.warn("Test Warn!");
+        logger.error("Test Error!");
+        
 //        User user1 = new User();
 //        user1.setUserName("Nick HO");
 //        user1.setEmail("hochaucan@gmal.com");

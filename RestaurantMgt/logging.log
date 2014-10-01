@@ -1,0 +1,4 @@
+2014-10-01 23:45:30 WARN  RestaurantMgTest:32 - Test Warn!
+2014-10-01 23:45:30 ERROR RestaurantMgTest:33 - Test Error!
+2014-10-01 23:45:59 WARN  RestaurantMgTest:32 - Test Warn!
+2014-10-01 23:45:59 ERROR RestaurantMgTest:33 - Test Error!

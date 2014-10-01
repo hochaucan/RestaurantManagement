@@ -39,8 +39,19 @@ public class Menu {
     @OneToMany(mappedBy = "menu")
     private List<CookingDetail> cookingDetails = new ArrayList<CookingDetail>();
 
+    @ManyToMany(mappedBy = "menus")
+    private List<Voucher> vouchers = new ArrayList<Voucher>();
+
     public int getMenuId() {
         return menuId;
+    }
+
+    public List<Voucher> getVouchers() {
+        return vouchers;
+    }
+
+    public void setVouchers(List<Voucher> vouchers) {
+        this.vouchers = vouchers;
     }
 
     public void setMenuId(int menuId) {
