@@ -16,6 +16,7 @@
     <class>model.Chef</class>
     <class>model.CookingDetail</class>
     <class>model.CustOrder</class>
+    <class>model.Chatting</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=RestaurantMgt"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
