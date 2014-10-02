@@ -5,9 +5,11 @@
  */
 package unitTest;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import model.*;
 import model.Menu;
 import org.apache.log4j.Logger;
@@ -28,9 +30,15 @@ public class RestaurantMgTest {
     //static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(RestaurantMgTest.class);
 
     public static void main(String[] args) {
+        
+//TEST LOG4J
         PropertyConfigurator.configure("log4j.properties");
         logger.warn("Test Warn!");
         logger.error("Test Error!");
+        
+        
+       
+        
         
 //        User user1 = new User();
 //        user1.setUserName("Nick HO");
@@ -44,15 +52,15 @@ public class RestaurantMgTest {
 //        userRole.setName("Admin");
 //        userRole.getUsers().add(user1);
 //        userRole.getUsers().add(user2);
-
+ String sql ="select * from Employee";
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
 
         try {
-//            em.getTransaction().begin();
-//            em.persist(user1);
-//            em.persist(user2);
-//            em.persist(userRole);
+            em.getTransaction().begin();
+            Query query = em.createQuery(sql);
+            List<Employee> rs = query.getResultList();
+          
 
             em.getTransaction().commit();
 
