@@ -2,22 +2,14 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="RestaurantMgt_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>model.Menu</class>
-    <class>model.OrderDetail</class>
-    <class>model.Table</class>
+    <class>model.Chatting</class>
+    <class>model.Chef</class>
+    <class>model.CustOrder</class>
+    <class>model.Customer</class>
     <class>model.Employee</class>
     <class>model.EmployeeRole</class>
-    <class>model.Customer</class>
-    <class>model.FoodRevert</class>
-    <class>model.Reservation</class>
-    <class>model.Recipes</class>
-    <class>model.Store</class>
-    <class>model.Supplier</class>
-    <class>model.Chef</class>
-    <class>model.CookingDetail</class>
-    <class>model.CustOrder</class>
-    <class>model.Chatting</class>
-    <class>model.Voucher</class>
+    <class>model.Food</class>
+    <class>model.OrderDetail</class>
     <class>model.SaleReport</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost;databaseName=RestaurantMgt"/>

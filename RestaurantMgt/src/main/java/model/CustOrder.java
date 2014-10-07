@@ -20,8 +20,12 @@ public class CustOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    private int totalQuantity;
-    private Date date;
+    private String customerName;
+    private int Discount;
+    private boolean IsReserve;
+    private int numOfPerson;
+    private Date startTime;
+    private Date endTime;
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
@@ -38,20 +42,52 @@ public class CustOrder {
         this.orderId = orderId;
     }
 
-    public int getTotalQuantity() {
-        return totalQuantity;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
+    public int getNumOfPerson() {
+        return numOfPerson;
     }
 
-    public Date getDate() {
-        return date;
+    public void setNumOfPerson(int numOfPerson) {
+        this.numOfPerson = numOfPerson;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public boolean isIsReserve() {
+        return IsReserve;
+    }
+
+    public int getDiscount() {
+        return Discount;
+    }
+
+    public void setDiscount(int Discount) {
+        this.Discount = Discount;
+    }
+
+    public void setIsReserve(boolean IsReserve) {
+        this.IsReserve = IsReserve;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public List<OrderDetail> getOrderDetails() {
@@ -70,5 +106,4 @@ public class CustOrder {
         this.customer = customer;
     }
 
-   
 }

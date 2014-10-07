@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.sql.Date;
 import javax.persistence.*;
 
 /**
@@ -17,10 +16,11 @@ public class OrderDetail {
 
     @EmbeddedId
     private OrderDetailKey orderDetailKey;
-    private Date starttime;
-    private Date endTime;
     private int quantity;
     private double price;
+    private boolean isRevert;
+    private String revertReason;
+    private String description;
     private String status;
 
     @ManyToOne
@@ -28,28 +28,8 @@ public class OrderDetail {
     private CustOrder order;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "menuId", referencedColumnName = "menuId")
-    private Menu menu;
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "tableId", referencedColumnName = "tableId")
-    private model.Table table;
-
-    public Date getStarttime() {
-        return starttime;
-    }
-
-    public void setStarttime(Date starttime) {
-        this.starttime = starttime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+    @PrimaryKeyJoinColumn(name = "foodId", referencedColumnName = "foodId")
+    private Food food;
 
     public int getQuantity() {
         return quantity;
@@ -71,6 +51,30 @@ public class OrderDetail {
         return status;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isIsRevert() {
+        return isRevert;
+    }
+
+    public void setIsRevert(boolean isRevert) {
+        this.isRevert = isRevert;
+    }
+
+    public String getRevertReason() {
+        return revertReason;
+    }
+
+    public void setRevertReason(String revertReason) {
+        this.revertReason = revertReason;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -83,20 +87,12 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public Food getFood() {
+        return food;
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public model.Table getTable() {
-        return table;
-    }
-
-    public void setTable(model.Table table) {
-        this.table = table;
+    public void setFood(Food food) {
+        this.food = food;
     }
 
     public OrderDetailKey getOrderDetailKey() {
@@ -113,6 +109,5 @@ public class OrderDetail {
 class OrderDetailKey {
 
     private int orderId;
-    private int menuId;
-    private int tableId;
+    private int foodId;
 }

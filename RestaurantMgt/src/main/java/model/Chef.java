@@ -23,7 +23,7 @@ public class Chef {
     private String regular;
 
     @OneToMany(mappedBy = "chef")
-    private List<CookingDetail> cookingDetails = new ArrayList<CookingDetail>();
+    private List<Food> foods = new ArrayList<Food>();
 
     public int getChefId() {
         return chefId;
@@ -49,11 +49,12 @@ public class Chef {
         this.regular = regular;
     }
 
-    public List<CookingDetail> getCookingDetails() {
-        return cookingDetails;
+    public List<Food> getFoods() {
+        return foods;
     }
 
-    public void setCookingDetails(List<CookingDetail> cookingDetails) {
-        this.cookingDetails = cookingDetails;
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
+
 }

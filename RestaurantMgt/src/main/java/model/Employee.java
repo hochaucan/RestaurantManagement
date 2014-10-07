@@ -34,9 +34,6 @@ public class Employee {
     @JoinColumn(name = "ROLEID")
     private EmployeeRole userRole;
 
-    @OneToMany(mappedBy = "employee")
-    private List<CookingDetail> cookingDetails = new ArrayList<CookingDetail>();
-
     public int getEmployeeId() {
         return employeeId;
     }
@@ -92,13 +89,4 @@ public class Employee {
     public void setUserRole(EmployeeRole userRole) {
         this.userRole = userRole;
     }
-
-    public List<CookingDetail> getCookingDetails() {
-        return cookingDetails;
-    }
-
-    public void setCookingDetails(List<CookingDetail> cookingDetails) {
-        this.cookingDetails = cookingDetails;
-    }
-
 }

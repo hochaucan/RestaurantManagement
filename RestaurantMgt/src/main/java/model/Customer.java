@@ -28,9 +28,6 @@ public class Customer {
     private String address;
 
     @OneToMany(mappedBy = "customer")
-    private List<FoodRevert> customers = new ArrayList<FoodRevert>();
-
-    @OneToMany(mappedBy = "customer")
     private List<CustOrder> orders = new ArrayList<CustOrder>();
 
     public int getCustomerId() {
@@ -80,13 +77,4 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public List<FoodRevert> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<FoodRevert> customers) {
-        this.customers = customers;
-    }
-
 }

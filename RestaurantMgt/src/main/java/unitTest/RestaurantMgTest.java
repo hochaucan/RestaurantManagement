@@ -11,7 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import model.*;
-import model.Menu;
+import model.Food;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -26,15 +26,15 @@ public class RestaurantMgTest {
      */
     private static final String PERSISTENCE_UNIT_NAME = "RestaurantMgt_jar_1.0-SNAPSHOTPU";
     private static EntityManagerFactory factory;
-    static final Logger logger = Logger.getLogger(RestaurantMgTest.class);
+   // static final Logger logger = Logger.getLogger(RestaurantMgTest.class);
     //static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(RestaurantMgTest.class);
 
     public static void main(String[] args) {
         
 //TEST LOG4J
-        PropertyConfigurator.configure("log4j.properties");
-        logger.warn("Test Warn!");
-        logger.error("Test Error!");
+       // PropertyConfigurator.configure("log4j.properties");
+       // logger.warn("Test Warn!");
+        //logger.error("Test Error!");
         
         
        
@@ -52,14 +52,14 @@ public class RestaurantMgTest {
 //        userRole.setName("Admin");
 //        userRole.getUsers().add(user1);
 //        userRole.getUsers().add(user2);
- String sql ="select * from Employee";
+ //String sql ="select * from Employee";
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
 
         try {
             em.getTransaction().begin();
-            Query query = em.createQuery(sql);
-            List<Employee> rs = query.getResultList();
+//            Query query = em.createQuery(sql);
+//            List<Employee> rs = query.getResultList();
           
 
             em.getTransaction().commit();

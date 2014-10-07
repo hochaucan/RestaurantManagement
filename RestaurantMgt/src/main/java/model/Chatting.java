@@ -8,10 +8,7 @@ package model;
 import java.sql.Date;
 import javax.persistence.*;
 
-/**
- *
- * @author Nick
- */
+
 @Entity
 public class Chatting {
 
