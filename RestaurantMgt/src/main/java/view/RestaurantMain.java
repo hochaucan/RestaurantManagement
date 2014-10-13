@@ -3,8 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -17,6 +26,12 @@ public class RestaurantMain extends javax.swing.JFrame {
      */
     public RestaurantMain() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        em = factory.createEntityManager();
+        addFood();
+        showTableOrder();
     }
 
     /**
@@ -28,134 +43,524 @@ public class RestaurantMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTable1 = new javax.swing.JButton();
-        btnTable2 = new javax.swing.JButton();
-        btnTable3 = new javax.swing.JButton();
-        btnTable4 = new javax.swing.JButton();
-        btnTable5 = new javax.swing.JButton();
-        btnTable6 = new javax.swing.JButton();
-        btnTable7 = new javax.swing.JButton();
-        btnTable8 = new javax.swing.JButton();
-        btnTable9 = new javax.swing.JButton();
-        btnTable10 = new javax.swing.JButton();
-        btnTable11 = new javax.swing.JButton();
-        btnTable12 = new javax.swing.JButton();
-        btnTable13 = new javax.swing.JButton();
-        btnTable14 = new javax.swing.JButton();
-        btnTable15 = new javax.swing.JButton();
-        btnTable16 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOrder = new javax.swing.JTable();
+        lblTableHeader = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblTable1 = new javax.swing.JLabel();
+        rdoTable1 = new javax.swing.JRadioButton();
+        lblTable2 = new javax.swing.JLabel();
+        rdoTable2 = new javax.swing.JRadioButton();
+        lblTable3 = new javax.swing.JLabel();
+        rdoTable3 = new javax.swing.JRadioButton();
+        lblTable4 = new javax.swing.JLabel();
+        rdoTable4 = new javax.swing.JRadioButton();
+        lblTable5 = new javax.swing.JLabel();
+        rdoTable5 = new javax.swing.JRadioButton();
+        lblTable6 = new javax.swing.JLabel();
+        rdoTable6 = new javax.swing.JRadioButton();
+        lblTable7 = new javax.swing.JLabel();
+        rdoTable7 = new javax.swing.JRadioButton();
+        lblTable8 = new javax.swing.JLabel();
+        rdoTable8 = new javax.swing.JRadioButton();
+        lblTable9 = new javax.swing.JLabel();
+        rdoTable9 = new javax.swing.JRadioButton();
+        lblTable10 = new javax.swing.JLabel();
+        rdoTable10 = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        btnEmployeeConf = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        lblHotTea = new javax.swing.JLabel();
+        lblBear = new javax.swing.JLabel();
+        lblCoffee = new javax.swing.JLabel();
+        lblFrechFries = new javax.swing.JLabel();
+        lblWine = new javax.swing.JLabel();
+        lblCake = new javax.swing.JLabel();
+        lblPizza = new javax.swing.JLabel();
+        lblBurger = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnTable1.setText("Table 1");
-        btnTable1.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413114511_chef.png")); // NOI18N
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Order"));
+
+        tblOrder.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblOrder);
+
+        lblTableHeader.setForeground(new java.awt.Color(204, 0, 0));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(lblTableHeader)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(lblTableHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Original Price");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setText("Discount");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Total Price");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel17.setFont(new java.awt.Font("Vladimir Script", 1, 48)); // NOI18N
+        jLabel17.setText("Shareton");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\cancel.png")); // NOI18N
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 124, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel5)
+                .addContainerGap())
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBox1, jTextField1, jTextField2});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Table"));
+
+        lblTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable1.setText("1");
+
+        buttonGroup1.add(rdoTable1);
+        rdoTable1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable1ActionPerformed(evt);
+                rdoTable1ActionPerformed(evt);
             }
         });
 
-        btnTable2.setText("Table 2");
-        btnTable2.addActionListener(new java.awt.event.ActionListener() {
+        lblTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable2.setText("2");
+
+        buttonGroup1.add(rdoTable2);
+        rdoTable2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable2ActionPerformed(evt);
+                rdoTable2ActionPerformed(evt);
             }
         });
 
-        btnTable3.setText("Table 8");
-        btnTable3.addActionListener(new java.awt.event.ActionListener() {
+        lblTable3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable3.setText("3");
+
+        buttonGroup1.add(rdoTable3);
+        rdoTable3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable3ActionPerformed(evt);
+                rdoTable3ActionPerformed(evt);
             }
         });
 
-        btnTable4.setText("Table 3");
-        btnTable4.addActionListener(new java.awt.event.ActionListener() {
+        lblTable4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable4.setText("4");
+
+        buttonGroup1.add(rdoTable4);
+        rdoTable4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable4ActionPerformed(evt);
+                rdoTable4ActionPerformed(evt);
             }
         });
 
-        btnTable5.setText("Table 7");
-        btnTable5.addActionListener(new java.awt.event.ActionListener() {
+        lblTable5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable5.setText("5");
+
+        buttonGroup1.add(rdoTable5);
+        rdoTable5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable5ActionPerformed(evt);
+                rdoTable5ActionPerformed(evt);
             }
         });
 
-        btnTable6.setText("Table 5");
-        btnTable6.addActionListener(new java.awt.event.ActionListener() {
+        lblTable6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable6.setText("6");
+
+        buttonGroup1.add(rdoTable6);
+        rdoTable6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable6ActionPerformed(evt);
+                rdoTable6ActionPerformed(evt);
             }
         });
 
-        btnTable7.setText("Table 6");
-        btnTable7.addActionListener(new java.awt.event.ActionListener() {
+        lblTable7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable7.setText("7");
+
+        buttonGroup1.add(rdoTable7);
+        rdoTable7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable7ActionPerformed(evt);
+                rdoTable7ActionPerformed(evt);
             }
         });
 
-        btnTable8.setText("Table 4");
-        btnTable8.addActionListener(new java.awt.event.ActionListener() {
+        lblTable8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable8.setText("8");
+
+        buttonGroup1.add(rdoTable8);
+        rdoTable8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable8ActionPerformed(evt);
+                rdoTable8ActionPerformed(evt);
             }
         });
 
-        btnTable9.setText("Table 12");
-        btnTable9.addActionListener(new java.awt.event.ActionListener() {
+        lblTable9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable9.setText("9");
+
+        buttonGroup1.add(rdoTable9);
+        rdoTable9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable9ActionPerformed(evt);
+                rdoTable9ActionPerformed(evt);
             }
         });
 
-        btnTable10.setText("Table 11");
-        btnTable10.addActionListener(new java.awt.event.ActionListener() {
+        lblTable10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTable10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/table.png"))); // NOI18N
+        lblTable10.setText("10");
+
+        buttonGroup1.add(rdoTable10);
+        rdoTable10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable10ActionPerformed(evt);
+                rdoTable10ActionPerformed(evt);
             }
         });
 
-        btnTable11.setText("Table 9");
-        btnTable11.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTable9)
+                            .addComponent(lblTable7)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdoTable9)
+                                    .addComponent(rdoTable7)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(rdoTable1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTable3)
+                            .addComponent(lblTable1)
+                            .addComponent(lblTable5)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdoTable3)
+                                    .addComponent(rdoTable5))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTable2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(rdoTable2)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTable4)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(rdoTable4)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTable6)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(rdoTable6))))
+                    .addComponent(lblTable8)
+                    .addComponent(lblTable10)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rdoTable8)
+                            .addComponent(rdoTable10))))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable2)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable4)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable5))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable6)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable7))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable8)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable10))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTable9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rdoTable9)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jButton2.setText("Logout");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Restaurant Management");
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Configuration"));
+
+        jButton3.setText("Food");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable11ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        btnTable12.setText("Table 10");
-        btnTable12.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Chef");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable12ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        btnTable13.setText("Table 16");
-        btnTable13.addActionListener(new java.awt.event.ActionListener() {
+        btnEmployeeConf.setText("Employee");
+        btnEmployeeConf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable13ActionPerformed(evt);
+                btnEmployeeConfActionPerformed(evt);
             }
         });
 
-        btnTable14.setText("Table 15");
-        btnTable14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable14ActionPerformed(evt);
-            }
-        });
+        jButton5.setText("Customer");
 
-        btnTable15.setText("Table 13");
-        btnTable15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable15ActionPerformed(evt);
-            }
-        });
+        jButton6.setText("Report");
 
-        btnTable16.setText("Table 14");
-        btnTable16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTable16ActionPerformed(evt);
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmployeeConf, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEmployeeConf, jButton3, jButton4, jButton5, jButton6});
+
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEmployeeConf, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel3.setText("Hello, Nick HO");
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Food & Drink"));
+        jPanel3.setLayout(new java.awt.GridLayout(5, 0));
+
+        lblHotTea.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117220_Glass_Teapot_(Yellow).png")); // NOI18N
+        lblHotTea.setText("Hot Tea");
+        jPanel3.add(lblHotTea);
+
+        lblBear.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117806_beer.png")); // NOI18N
+        lblBear.setText("Beer");
+        jPanel3.add(lblBear);
+
+        lblCoffee.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117123_Coffecup.png")); // NOI18N
+        lblCoffee.setText("Coffee");
+        jPanel3.add(lblCoffee);
+
+        lblFrechFries.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117160_french_fries.png")); // NOI18N
+        lblFrechFries.setText("Frech Dries");
+        jPanel3.add(lblFrechFries);
+
+        lblWine.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117808_bar_beer.png")); // NOI18N
+        lblWine.setText("Wine");
+        jPanel3.add(lblWine);
+
+        lblCake.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117148_Donut_2.png")); // NOI18N
+        lblCake.setText("Cake");
+        jPanel3.add(lblCake);
+
+        lblPizza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117205_pizza_slice_128.png")); // NOI18N
+        lblPizza.setText("Pizza");
+        jPanel3.add(lblPizza);
+
+        lblBurger.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117209_burger.png")); // NOI18N
+        lblBurger.setText("Burger");
+        jPanel3.add(lblBurger);
+
+        jScrollPane2.setViewportView(jPanel3);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\chat.png")); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
             }
         });
 
@@ -164,140 +569,130 @@ public class RestaurantMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable8, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel3)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTable6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTable11, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable12, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable10, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTable15, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable16, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable14, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTable13, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(300, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTable6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTable11, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable12, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTable15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable16, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable14, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTable13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable1ActionPerformed
+    private void rdoTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable1ActionPerformed
         // TODO add your handling code here:
-        Order order = new Order(this, true);
-        order.setVisible(true);
-    }//GEN-LAST:event_btnTable1ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable1ActionPerformed
 
-    private void btnTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable2ActionPerformed
+    private void rdoTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable2ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable2ActionPerformed
 
-    private void btnTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable3ActionPerformed
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable3ActionPerformed
+        //ChatServer chatServer = new ChatServer();
+        //chatServer.setVisible(true);
+       // ChatFrame chat = new ChatFrame();
+       // chat.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void btnTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable4ActionPerformed
+    private void btnEmployeeConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeConfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable4ActionPerformed
+        view.Employee emp = new view.Employee(this, true);
+        emp.setVisible(true);
+    }//GEN-LAST:event_btnEmployeeConfActionPerformed
 
-    private void btnTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable5ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable5ActionPerformed
+        Food food = new Food(this, true);
+        food.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btnTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable6ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable6ActionPerformed
+        //Chef chef = new Chef(this,true);
+        //chef.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void btnTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable7ActionPerformed
+    private void rdoTable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable7ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable3ActionPerformed
 
-    private void btnTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable8ActionPerformed
+    private void rdoTable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable8ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable4ActionPerformed
 
-    private void btnTable9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable9ActionPerformed
+    private void rdoTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable9ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable5ActionPerformed
 
-    private void btnTable10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable10ActionPerformed
+    private void rdoTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable10ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable6ActionPerformed
 
-    private void btnTable11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable11ActionPerformed
+    private void rdoTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable7ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable11ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable7ActionPerformed
 
-    private void btnTable12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable12ActionPerformed
+    private void rdoTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable8ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable12ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable8ActionPerformed
 
-    private void btnTable13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable13ActionPerformed
+    private void rdoTable9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable13ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable9ActionPerformed
 
-    private void btnTable14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable14ActionPerformed
+    private void rdoTable10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable10ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable14ActionPerformed
-
-    private void btnTable15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable15ActionPerformed
-
-    private void btnTable16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTable16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTable16ActionPerformed
+        choiceTable();
+    }//GEN-LAST:event_rdoTable10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,22 +729,153 @@ public class RestaurantMain extends javax.swing.JFrame {
         });
     }
 
+    private static final String PERSISTENCE_UNIT_NAME = "RestaurantMgt_jar_1.0-SNAPSHOTPU";
+    private static EntityManagerFactory factory;
+    private EntityManager em;
+    private DefaultTableModel dtm;
+
+    private void addFood() {
+        JLabel lab1 = new JLabel();
+        lab1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117806_beer.png")); // NOI18N
+        lab1.setText("Beer");
+        jPanel3.add(lab1);
+
+        JLabel lab2 = new JLabel();
+        lab2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117160_french_fries.png")); // NOI18N
+        lab2.setText("Frech Dries");
+        jPanel3.add(lab2);
+    }
+
+    private void showTableOrder() {
+        Object[] columnNames = {"Food Name", "Quantity", "Price", "Revert", "Reason"};
+        dtm = new DefaultTableModel(new Object[0][0], columnNames);
+        tblOrder.setModel(dtm);
+    }
+
+    private void choiceTable() {
+        resetTableChosen();
+        if (rdoTable1.isSelected() == true) {
+            lblTable1.setForeground(Color.red);
+            lblTableHeader.setText("Table 1");
+            return;
+        }
+        if (rdoTable2.isSelected() == true) {
+            lblTable2.setForeground(Color.red);
+            lblTableHeader.setText("Table 2");
+            return;
+        }
+        if (rdoTable3.isSelected() == true) {
+            lblTable3.setForeground(Color.red);
+            lblTableHeader.setText("Table 3");
+            return;
+        }
+        if (rdoTable4.isSelected() == true) {
+            lblTable4.setForeground(Color.red);
+            lblTableHeader.setText("Table 4");
+            return;
+        }
+        if (rdoTable5.isSelected() == true) {
+            lblTable5.setForeground(Color.red);
+            lblTableHeader.setText("Table 5");
+            return;
+        }
+        if (rdoTable6.isSelected() == true) {
+            lblTable6.setForeground(Color.red);
+            lblTableHeader.setText("Table 6");
+            return;
+        }
+        if (rdoTable7.isSelected() == true) {
+            lblTable7.setForeground(Color.red);
+            lblTableHeader.setText("Table 7");
+            return;
+        }
+        if (rdoTable8.isSelected() == true) {
+            lblTable8.setForeground(Color.red);
+            lblTableHeader.setText("Table 8");
+            return;
+        }
+        if (rdoTable9.isSelected() == true) {
+            lblTable9.setForeground(Color.red);
+            lblTableHeader.setText("Table 9");
+            return;
+        }
+        if (rdoTable10.isSelected() == true) {
+            lblTable10.setForeground(Color.red);
+            lblTableHeader.setText("Table 10");
+            return;
+        }
+
+    }
+
+    private void resetTableChosen() {
+        lblTable1.setForeground(Color.black);
+        lblTable2.setForeground(Color.black);
+        lblTable3.setForeground(Color.black);
+        lblTable4.setForeground(Color.black);
+        lblTable5.setForeground(Color.black);
+        lblTable6.setForeground(Color.black);
+        lblTable7.setForeground(Color.black);
+        lblTable8.setForeground(Color.black);
+        lblTable9.setForeground(Color.black);
+        lblTable10.setForeground(Color.black);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTable1;
-    private javax.swing.JButton btnTable10;
-    private javax.swing.JButton btnTable11;
-    private javax.swing.JButton btnTable12;
-    private javax.swing.JButton btnTable13;
-    private javax.swing.JButton btnTable14;
-    private javax.swing.JButton btnTable15;
-    private javax.swing.JButton btnTable16;
-    private javax.swing.JButton btnTable2;
-    private javax.swing.JButton btnTable3;
-    private javax.swing.JButton btnTable4;
-    private javax.swing.JButton btnTable5;
-    private javax.swing.JButton btnTable6;
-    private javax.swing.JButton btnTable7;
-    private javax.swing.JButton btnTable8;
-    private javax.swing.JButton btnTable9;
+    private javax.swing.JButton btnEmployeeConf;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblBear;
+    private javax.swing.JLabel lblBurger;
+    private javax.swing.JLabel lblCake;
+    private javax.swing.JLabel lblCoffee;
+    private javax.swing.JLabel lblFrechFries;
+    private javax.swing.JLabel lblHotTea;
+    private javax.swing.JLabel lblPizza;
+    private javax.swing.JLabel lblTable1;
+    private javax.swing.JLabel lblTable10;
+    private javax.swing.JLabel lblTable2;
+    private javax.swing.JLabel lblTable3;
+    private javax.swing.JLabel lblTable4;
+    private javax.swing.JLabel lblTable5;
+    private javax.swing.JLabel lblTable6;
+    private javax.swing.JLabel lblTable7;
+    private javax.swing.JLabel lblTable8;
+    private javax.swing.JLabel lblTable9;
+    private javax.swing.JLabel lblTableHeader;
+    private javax.swing.JLabel lblWine;
+    private javax.swing.JRadioButton rdoTable1;
+    private javax.swing.JRadioButton rdoTable10;
+    private javax.swing.JRadioButton rdoTable2;
+    private javax.swing.JRadioButton rdoTable3;
+    private javax.swing.JRadioButton rdoTable4;
+    private javax.swing.JRadioButton rdoTable5;
+    private javax.swing.JRadioButton rdoTable6;
+    private javax.swing.JRadioButton rdoTable7;
+    private javax.swing.JRadioButton rdoTable8;
+    private javax.swing.JRadioButton rdoTable9;
+    private javax.swing.JTable tblOrder;
     // End of variables declaration//GEN-END:variables
 }
