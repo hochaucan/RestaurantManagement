@@ -5,15 +5,24 @@
  */
 package view;
 
+import com.ui.ChatFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import model.Food;
+import model.OrderDetail;
 
 /**
  *
@@ -30,8 +39,10 @@ public class RestaurantMain extends javax.swing.JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         em = factory.createEntityManager();
+
         addFood();
-        showTableOrder();
+        showTableOrderColumn();
+        lblCancelOrder.setEnabled(false);
     }
 
     /**
@@ -53,11 +64,12 @@ public class RestaurantMain extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
+        txtOriginalPrice = new javax.swing.JTextField();
+        cbbDiscount = new javax.swing.JComboBox();
+        txtTotalPrice = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblCancelOrder = new javax.swing.JLabel();
+        lblOrder = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblTable1 = new javax.swing.JLabel();
@@ -154,14 +166,26 @@ public class RestaurantMain extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setText("Total Price");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbDiscount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "10", "15", "20", "25", "30", "35", "40", "45", "50", " " }));
 
         jLabel17.setFont(new java.awt.Font("Vladimir Script", 1, 48)); // NOI18N
         jLabel17.setText("Shareton");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\cancel.png")); // NOI18N
+        lblCancelOrder.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\cancel.png")); // NOI18N
+        lblCancelOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCancelOrderMouseClicked(evt);
+            }
+        });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png")); // NOI18N
+        lblOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart.png"))); // NOI18N
+        lblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblOrderMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setText("%");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,53 +203,58 @@ public class RestaurantMain extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtOriginalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 124, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addComponent(cbbDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotalPrice)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
+                .addComponent(lblOrder)
                 .addGap(48, 48, 48)
-                .addComponent(jLabel5)
+                .addComponent(lblCancelOrder)
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBox1, jTextField1, jTextField2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtOriginalPrice, txtTotalPrice});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtOriginalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbbDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7))
-                .addContainerGap())
+                    .addComponent(lblCancelOrder, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblOrder, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(19, 19, 19))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Table"));
@@ -525,10 +554,20 @@ public class RestaurantMain extends javax.swing.JFrame {
 
         lblHotTea.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117220_Glass_Teapot_(Yellow).png")); // NOI18N
         lblHotTea.setText("Hot Tea");
+        lblHotTea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHotTeaMouseClicked(evt);
+            }
+        });
         jPanel3.add(lblHotTea);
 
         lblBear.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117806_beer.png")); // NOI18N
         lblBear.setText("Beer");
+        lblBear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBearMouseClicked(evt);
+            }
+        });
         jPanel3.add(lblBear);
 
         lblCoffee.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117123_Coffecup.png")); // NOI18N
@@ -604,7 +643,7 @@ public class RestaurantMain extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 16, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -621,30 +660,50 @@ public class RestaurantMain extends javax.swing.JFrame {
     private void rdoTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable1ActionPerformed
         // TODO add your handling code here:
         choiceTable();
+        showTableOrderColumn();
+        if (!dtmTM.containsKey("t1")) {
+            tblOrder.setModel(dtm);
+            lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
+            lblCancelOrder.setEnabled(false);
+        } else {
+            tblOrder.setModel(dtmTM.get("t1"));
+            lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\payment.png"));
+        }
+
+        txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
     }//GEN-LAST:event_rdoTable1ActionPerformed
 
     private void rdoTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable2ActionPerformed
         // TODO add your handling code here:
         choiceTable();
+        showTableOrderColumn();
+        if (!dtmTM.containsKey("t2")) {
+            tblOrder.setModel(dtm);
+            lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
+            lblCancelOrder.setEnabled(false);
+        } else {
+            tblOrder.setModel(dtmTM.get("t2"));
+            lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\payment.png"));
+        }
+
+        txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
     }//GEN-LAST:event_rdoTable2ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        // TODO add your handling code here:
-        //ChatServer chatServer = new ChatServer();
-        //chatServer.setVisible(true);
-       // ChatFrame chat = new ChatFrame();
-       // chat.setVisible(true);
+        ChatFrame chat = new ChatFrame();
+        chat.setVisible(true);
+
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void btnEmployeeConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeConfActionPerformed
         // TODO add your handling code here:
-        view.Employee emp = new view.Employee(this, true);
+        view.EmployeeView emp = new view.EmployeeView(this, true);
         emp.setVisible(true);
     }//GEN-LAST:event_btnEmployeeConfActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Food food = new Food(this, true);
+        FoodView food = new FoodView(this, true);
         food.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -694,6 +753,91 @@ public class RestaurantMain extends javax.swing.JFrame {
         choiceTable();
     }//GEN-LAST:event_rdoTable10ActionPerformed
 
+    private void lblHotTeaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHotTeaMouseClicked
+        // TODO add your handling code here:
+        Food food = new Food();
+        food.setFoodName("Tea Hot");
+        OrderDetail order = new OrderDetail();
+        order.setQuantity(2);
+        order.setPrice(250);
+
+        insertOrder(order, food);
+        //txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+    }//GEN-LAST:event_lblHotTeaMouseClicked
+
+    private void lblBearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBearMouseClicked
+        // TODO add your handling code here:
+        OrderDetail order = new OrderDetail();
+        Food food = new Food();
+        food.setFoodName("Beer");
+        order.setQuantity(5);
+        order.setPrice(15);
+
+        insertOrder(order, food);
+        //txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+    }//GEN-LAST:event_lblBearMouseClicked
+
+    private void lblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderMouseClicked
+        // TODO add your handling code here:
+        if (rdoTable1.isSelected() == true && !dtmTM.containsKey("t1")) {
+            dtmTM.put("t1", dtm);
+            JOptionPane.showMessageDialog(this, "Order successfully!");
+            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
+            lblCancelOrder.setEnabled(true);
+            return;
+        }
+        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t2")) {
+            dtmTM.put("t2", dtm);
+            JOptionPane.showMessageDialog(this, "Order successfully!");
+            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
+            lblCancelOrder.setEnabled(true);
+            return;
+        }
+        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t3")) {
+            dtmTM.put("t3", dtm);
+            JOptionPane.showMessageDialog(this, "Order successfully!");
+            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
+            return;
+        }
+        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t4")) {
+            dtmTM.put("t4", dtm);
+            JOptionPane.showMessageDialog(this, "Order successfully!");
+            return;
+        }
+        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t5")) {
+            dtmTM.put("t5", dtm);
+            JOptionPane.showMessageDialog(this, "Order successfully!");
+            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
+            return;
+        }
+    }//GEN-LAST:event_lblOrderMouseClicked
+
+    private void lblCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelOrderMouseClicked
+        // TODO add your handling code here:
+        String message = "Are you sure to cancel the Order of ";
+        String title = "Confirmation";
+        if (rdoTable1.isSelected() == true) {
+            int reply = JOptionPane.showConfirmDialog(null, message + "Table 1?", title, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                dtmTM.remove("t1");
+                showTableOrderColumn();
+                lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
+                txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+            }
+            return;
+        }
+        if (rdoTable2.isSelected() == true) {
+            int reply = JOptionPane.showConfirmDialog(null, message + "Table 2?", title, JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                dtmTM.remove("t2");
+                showTableOrderColumn();
+                lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
+                txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+            }
+            return;
+        }
+    }//GEN-LAST:event_lblCancelOrderMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -732,7 +876,9 @@ public class RestaurantMain extends javax.swing.JFrame {
     private static final String PERSISTENCE_UNIT_NAME = "RestaurantMgt_jar_1.0-SNAPSHOTPU";
     private static EntityManagerFactory factory;
     private EntityManager em;
-    private DefaultTableModel dtm;
+    TreeMap<String, DefaultTableModel> dtmTM = new TreeMap<String, DefaultTableModel>();
+    DefaultTableModel dtm = null;
+    private List<OrderDetail> orders = null;
 
     private void addFood() {
         JLabel lab1 = new JLabel();
@@ -746,7 +892,8 @@ public class RestaurantMain extends javax.swing.JFrame {
         jPanel3.add(lab2);
     }
 
-    private void showTableOrder() {
+    private void showTableOrderColumn() {
+
         Object[] columnNames = {"Food Name", "Quantity", "Price", "Revert", "Reason"};
         dtm = new DefaultTableModel(new Object[0][0], columnNames);
         tblOrder.setModel(dtm);
@@ -819,15 +966,51 @@ public class RestaurantMain extends javax.swing.JFrame {
         lblTable9.setForeground(Color.black);
         lblTable10.setForeground(Color.black);
     }
+
+    private void insertOrder(OrderDetail order, Food food) {
+        Object[] o = new Object[5];
+        o[0] = food.getFoodName();
+        o[1] = order.getQuantity();
+        o[2] = order.getPrice();
+        o[3] = order.isIsRevert();
+        o[4] = order.getRevertReason();
+
+        if (rdoTable1.isSelected() == true && dtmTM.containsKey("t1")) {
+            dtmTM.get("t1").addRow(o);
+            tblOrder.setModel(dtmTM.get("t1"));
+            txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+            return;
+        }
+        if (rdoTable2.isSelected() == true && dtmTM.containsKey("t2")) {
+            dtmTM.get("t2").addRow(o);
+            tblOrder.setModel(dtmTM.get("t2"));
+            txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+            return;
+        }
+        dtm.addRow(o);
+        tblOrder.setModel(dtm);
+        txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+    }
+
+    private double getOriginalPrice() {
+        int priceCol = 2;
+        double totalPrice = 0;
+        DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            totalPrice += (double) model.getValueAt(i, priceCol);
+        }
+        return totalPrice;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEmployeeConf;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox cbbDiscount;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -835,7 +1018,6 @@ public class RestaurantMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -845,14 +1027,14 @@ public class RestaurantMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblBear;
     private javax.swing.JLabel lblBurger;
     private javax.swing.JLabel lblCake;
+    private javax.swing.JLabel lblCancelOrder;
     private javax.swing.JLabel lblCoffee;
     private javax.swing.JLabel lblFrechFries;
     private javax.swing.JLabel lblHotTea;
+    private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblPizza;
     private javax.swing.JLabel lblTable1;
     private javax.swing.JLabel lblTable10;
@@ -877,5 +1059,7 @@ public class RestaurantMain extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoTable8;
     private javax.swing.JRadioButton rdoTable9;
     private javax.swing.JTable tblOrder;
+    private javax.swing.JTextField txtOriginalPrice;
+    private javax.swing.JTextField txtTotalPrice;
     // End of variables declaration//GEN-END:variables
 }

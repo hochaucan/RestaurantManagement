@@ -3,6 +3,8 @@ package com.ui;
 import com.socket.History;
 import com.socket.Message;
 import com.socket.SocketClient;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -23,30 +25,57 @@ public class ChatFrame extends javax.swing.JFrame {
     public String historyFile = "D:/History.xml";
     public HistoryFrame historyFrame;
     public History hist;
-    
+
     public ChatFrame() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setTitle("Chatting");
         model.addElement("All");
         jList1.setSelectedIndex(0);
-        
+
         jTextField6.setEditable(false);
-        
+
         this.addWindowListener(new WindowListener() {
 
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) { try{ client.send(new Message("message", username, ".bye", "SERVER")); clientThread.stop();  }catch(Exception ex){} }
-            @Override public void windowClosed(WindowEvent e) {}
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    client.send(new Message("message", username, ".bye", "SERVER"));
+                    clientThread.stop();
+                } catch (Exception ex) {
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
         });
-        
+
         hist = new History(historyFile);
     }
-    
-    public boolean isWin32(){
+
+    public boolean isWin32() {
         return System.getProperty("os.name").startsWith("Windows");
     }
 
@@ -83,7 +112,7 @@ public class ChatFrame extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Chatting");
 
         jLabel1.setText("Host Address : ");
@@ -292,16 +321,16 @@ public class ChatFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        serverAddr = jTextField1.getText(); port = Integer.parseInt(jTextField2.getText());
-        
-        if(!serverAddr.isEmpty() && !jTextField2.getText().isEmpty()){
-            try{
+        serverAddr = jTextField1.getText();
+        port = Integer.parseInt(jTextField2.getText());
+
+        if (!serverAddr.isEmpty() && !jTextField2.getText().isEmpty()) {
+            try {
                 client = new SocketClient(this);
                 clientThread = new Thread(client);
                 clientThread.start();
                 client.send(new Message("test", "testUser", "testContent", "SERVER"));
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
                 jTextArea1.append("[Application > Me] : Server not found\n");
             }
         }
@@ -310,8 +339,8 @@ public class ChatFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         username = jTextField3.getText();
         password = jPasswordField1.getText();
-        
-        if(!username.isEmpty() && !password.isEmpty()){
+
+        if (!username.isEmpty() && !password.isEmpty()) {
             client.send(new Message("login", username, password, "SERVER"));
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -319,8 +348,8 @@ public class ChatFrame extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String msg = jTextField4.getText();
         String target = jList1.getSelectedValue().toString();
-        
-        if(!msg.isEmpty() && !target.isEmpty()){
+
+        if (!msg.isEmpty() && !target.isEmpty()) {
             jTextField4.setText("");
             client.send(new Message("message", username, msg, target));
         }
@@ -329,8 +358,8 @@ public class ChatFrame extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         username = jTextField3.getText();
         password = jPasswordField1.getText();
-        
-        if(!username.isEmpty() && !password.isEmpty()){
+
+        if (!username.isEmpty() && !password.isEmpty()) {
             client.send(new Message("signup", username, password, "SERVER"));
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -339,16 +368,16 @@ public class ChatFrame extends javax.swing.JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showDialog(this, "Select File");
         file = fileChooser.getSelectedFile();
-        
-        if(file != null){
-            if(!file.getName().isEmpty()){
-                jButton6.setEnabled(true); String str;
-                
-                if(jTextField5.getText().length() > 30){
+
+        if (file != null) {
+            if (!file.getName().isEmpty()) {
+                jButton6.setEnabled(true);
+                String str;
+
+                if (jTextField5.getText().length() > 30) {
                     String t = file.getPath();
                     str = t.substring(0, 20) + " [...] " + t.substring(t.length() - 20, t.length());
-                }
-                else{
+                } else {
                     str = file.getPath();
                 }
                 jTextField5.setText(str);
@@ -357,22 +386,21 @@ public class ChatFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-            long size = file.length();
-            if(size < 120 * 1024 * 1024){
-                client.send(new Message("upload_req", username, file.getName(), jList1.getSelectedValue().toString()));
-            }
-            else{
-                jTextArea1.append("[Application > Me] : File is size too large\n");
-            }
+        long size = file.length();
+        if (size < 120 * 1024 * 1024) {
+            client.send(new Message("upload_req", username, file.getName(), jList1.getSelectedValue().toString()));
+        } else {
+            jTextArea1.append("[Application > Me] : File is size too large\n");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         JFileChooser jf = new JFileChooser();
         jf.showDialog(this, "Select File");
-        
-        if(!jf.getSelectedFile().getPath().isEmpty()){
+
+        if (!jf.getSelectedFile().getPath().isEmpty()) {
             historyFile = jf.getSelectedFile().getPath();
-            if(this.isWin32()){
+            if (this.isWin32()) {
                 historyFile = historyFile.replace("/", "\\");
             }
             jTextField6.setText(historyFile);
@@ -380,7 +408,7 @@ public class ChatFrame extends javax.swing.JFrame {
             jButton7.setEnabled(false);
             jButton8.setEnabled(true);
             hist = new History(historyFile);
-                    
+
             historyFrame = new HistoryFrame(hist);
             historyFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             historyFrame.setVisible(false);
@@ -395,11 +423,10 @@ public class ChatFrame extends javax.swing.JFrame {
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } 
-        catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Look & Feel exception");
         }
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ChatFrame().setVisible(true);
