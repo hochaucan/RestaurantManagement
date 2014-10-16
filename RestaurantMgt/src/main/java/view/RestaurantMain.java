@@ -552,7 +552,7 @@ public class RestaurantMain extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Food & Drink"));
         jPanel3.setLayout(new java.awt.GridLayout(5, 0));
 
-        lblHotTea.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117220_Glass_Teapot_(Yellow).png")); // NOI18N
+        lblHotTea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117220_Glass_Teapot_(Yellow).png"))); // NOI18N
         lblHotTea.setText("Hot Tea");
         lblHotTea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -561,7 +561,7 @@ public class RestaurantMain extends javax.swing.JFrame {
         });
         jPanel3.add(lblHotTea);
 
-        lblBear.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117806_beer.png")); // NOI18N
+        lblBear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117806_beer.png"))); // NOI18N
         lblBear.setText("Beer");
         lblBear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -570,27 +570,27 @@ public class RestaurantMain extends javax.swing.JFrame {
         });
         jPanel3.add(lblBear);
 
-        lblCoffee.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117123_Coffecup.png")); // NOI18N
+        lblCoffee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117123_Coffecup.png"))); // NOI18N
         lblCoffee.setText("Coffee");
         jPanel3.add(lblCoffee);
 
-        lblFrechFries.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117160_french_fries.png")); // NOI18N
+        lblFrechFries.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117160_french_fries.png"))); // NOI18N
         lblFrechFries.setText("Frech Dries");
         jPanel3.add(lblFrechFries);
 
-        lblWine.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117808_bar_beer.png")); // NOI18N
+        lblWine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117808_bar_beer.png"))); // NOI18N
         lblWine.setText("Wine");
         jPanel3.add(lblWine);
 
-        lblCake.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117148_Donut_2.png")); // NOI18N
+        lblCake.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117148_Donut_2.png"))); // NOI18N
         lblCake.setText("Cake");
         jPanel3.add(lblCake);
 
-        lblPizza.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117205_pizza_slice_128.png")); // NOI18N
+        lblPizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117205_pizza_slice_128.png"))); // NOI18N
         lblPizza.setText("Pizza");
         jPanel3.add(lblPizza);
 
-        lblBurger.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nick\\Downloads\\1413117209_burger.png")); // NOI18N
+        lblBurger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1413117209_burger.png"))); // NOI18N
         lblBurger.setText("Burger");
         jPanel3.add(lblBurger);
 
@@ -668,6 +668,7 @@ public class RestaurantMain extends javax.swing.JFrame {
         } else {
             tblOrder.setModel(dtmTM.get("t1"));
             lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\payment.png"));
+            lblCancelOrder.setEnabled(true);
         }
 
         txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
@@ -684,6 +685,7 @@ public class RestaurantMain extends javax.swing.JFrame {
         } else {
             tblOrder.setModel(dtmTM.get("t2"));
             lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\payment.png"));
+            lblCancelOrder.setEnabled(true);
         }
 
         txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
@@ -761,8 +763,11 @@ public class RestaurantMain extends javax.swing.JFrame {
         order.setQuantity(2);
         order.setPrice(250);
 
-        insertOrder(order, food);
-        //txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+        if (!buttonGroup1.isSelected(null)) {
+            insertOrder(order, food);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Table", "Warning", JOptionPane.WARNING_MESSAGE, null);
+        }
     }//GEN-LAST:event_lblHotTeaMouseClicked
 
     private void lblBearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBearMouseClicked
@@ -772,44 +777,30 @@ public class RestaurantMain extends javax.swing.JFrame {
         food.setFoodName("Beer");
         order.setQuantity(5);
         order.setPrice(15);
-
-        insertOrder(order, food);
-        //txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+        if (!buttonGroup1.isSelected(null)) {
+            insertOrder(order, food);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select Table", "Warning", JOptionPane.WARNING_MESSAGE, null);
+        }
     }//GEN-LAST:event_lblBearMouseClicked
 
     private void lblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOrderMouseClicked
         // TODO add your handling code here:
-        if (rdoTable1.isSelected() == true && !dtmTM.containsKey("t1")) {
+        if (rdoTable1.isSelected() == true && !dtmTM.containsKey("t1") && tblOrder.getRowCount() != 0) {
             dtmTM.put("t1", dtm);
             JOptionPane.showMessageDialog(this, "Order successfully!");
             lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
             lblCancelOrder.setEnabled(true);
             return;
         }
-        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t2")) {
+        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t2") && tblOrder.getRowCount() != 0) {
             dtmTM.put("t2", dtm);
             JOptionPane.showMessageDialog(this, "Order successfully!");
             lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
             lblCancelOrder.setEnabled(true);
             return;
         }
-        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t3")) {
-            dtmTM.put("t3", dtm);
-            JOptionPane.showMessageDialog(this, "Order successfully!");
-            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
-            return;
-        }
-        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t4")) {
-            dtmTM.put("t4", dtm);
-            JOptionPane.showMessageDialog(this, "Order successfully!");
-            return;
-        }
-        if (rdoTable2.isSelected() == true && !dtmTM.containsKey("t5")) {
-            dtmTM.put("t5", dtm);
-            JOptionPane.showMessageDialog(this, "Order successfully!");
-            lblOrder.setIcon(new ImageIcon("C:\\Users\\Nick\\Downloads\\payment.png"));
-            return;
-        }
+
     }//GEN-LAST:event_lblOrderMouseClicked
 
     private void lblCancelOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelOrderMouseClicked
@@ -823,6 +814,7 @@ public class RestaurantMain extends javax.swing.JFrame {
                 showTableOrderColumn();
                 lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
                 txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+                lblCancelOrder.setEnabled(false);
             }
             return;
         }
@@ -833,6 +825,7 @@ public class RestaurantMain extends javax.swing.JFrame {
                 showTableOrderColumn();
                 lblOrder.setIcon(new ImageIcon("src\\main\\resources\\images\\cart.png"));
                 txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
+                lblCancelOrder.setEnabled(false);
             }
             return;
         }
@@ -852,16 +845,21 @@ public class RestaurantMain extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RestaurantMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RestaurantMain.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RestaurantMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RestaurantMain.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RestaurantMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RestaurantMain.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RestaurantMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RestaurantMain.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -969,20 +967,42 @@ public class RestaurantMain extends javax.swing.JFrame {
 
     private void insertOrder(OrderDetail order, Food food) {
         Object[] o = new Object[5];
-        o[0] = food.getFoodName();
+        o[0] = food.getFoodName().trim();
         o[1] = order.getQuantity();
         o[2] = order.getPrice();
         o[3] = order.isIsRevert();
         o[4] = order.getRevertReason();
 
         if (rdoTable1.isSelected() == true && dtmTM.containsKey("t1")) {
-            dtmTM.get("t1").addRow(o);
+            boolean isDuplicated = false;
+            for (int i = 0; i < dtmTM.get("t1").getRowCount(); i++) {
+                if (dtmTM.get("t1").getValueAt(i, 0).toString().trim() == food.getFoodName().trim()) {
+                    dtmTM.get("t1").setValueAt(Integer.parseInt(dtmTM.get("t1").getValueAt(i, 1).toString()) + 1, i, 1);
+                    isDuplicated = true;
+                    break;
+                }
+            }
+            if (isDuplicated == false) {
+                dtmTM.get("t1").addRow(o);
+            }
+
             tblOrder.setModel(dtmTM.get("t1"));
             txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
             return;
         }
         if (rdoTable2.isSelected() == true && dtmTM.containsKey("t2")) {
-            dtmTM.get("t2").addRow(o);
+            boolean isDuplicated = false;
+            for (int i = 0; i < dtmTM.get("t2").getRowCount(); i++) {
+                if (dtmTM.get("t2").getValueAt(i, 0).toString().trim() == food.getFoodName().trim()) {
+                    dtmTM.get("t2").setValueAt(Integer.parseInt(dtmTM.get("t2").getValueAt(i, 1).toString()) + 1, i, 1);
+                    isDuplicated = true;
+                    break;
+                }
+            }
+            if (isDuplicated == false) {
+                dtmTM.get("t2").addRow(o);
+            }
+
             tblOrder.setModel(dtmTM.get("t2"));
             txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
             return;
@@ -993,11 +1013,12 @@ public class RestaurantMain extends javax.swing.JFrame {
     }
 
     private double getOriginalPrice() {
+        int quantityCol = 1;
         int priceCol = 2;
         double totalPrice = 0;
         DefaultTableModel model = (DefaultTableModel) tblOrder.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
-            totalPrice += (double) model.getValueAt(i, priceCol);
+            totalPrice += (double) model.getValueAt(i, priceCol) * Integer.parseInt(model.getValueAt(i, quantityCol).toString());
         }
         return totalPrice;
     }
