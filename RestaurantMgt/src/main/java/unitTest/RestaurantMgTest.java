@@ -39,6 +39,7 @@ public class RestaurantMgTest {
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         EntityManager em = factory.createEntityManager();
         
+        //CREATE NEW OBJECT
         Employee empl = new Employee();
         empl.setUserName("Khuong Nguyen");
         empl.setPassword("oanh111!!!");
@@ -49,6 +50,17 @@ public class RestaurantMgTest {
         try {
 
             em.getTransaction().begin();
+            
+            //INSERT
+            em.persist(empl);
+            
+            //UPDATE
+            Employee empl2 = em.find(Employee.class, 1);
+            empl2.setUserName("Nick HO");
+            em.persist(empl2);
+            
+            //REMOVE
+            em.remove(empl);
 
             em.getTransaction().commit();
 

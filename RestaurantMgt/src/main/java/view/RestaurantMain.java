@@ -660,6 +660,15 @@ public class RestaurantMain extends javax.swing.JFrame {
     private void rdoTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable1ActionPerformed
         // TODO add your handling code here:
         choiceTable();
+//        if (dtm.getRowCount() > 0) {
+//            String message = "You have inserted Food, do you want to cancel Order?";
+//            String title = "Warning";
+//            int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+//            if (reply == JOptionPane.NO_OPTION) {
+//                return;
+//            }
+//        }
+
         showTableOrderColumn();
         if (!dtmTM.containsKey("t1")) {
             tblOrder.setModel(dtm);
@@ -677,6 +686,15 @@ public class RestaurantMain extends javax.swing.JFrame {
     private void rdoTable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoTable2ActionPerformed
         // TODO add your handling code here:
         choiceTable();
+//        if (dtm.getRowCount() > 0) {
+//            String message = "You have inserted Food, do you want to cancel Order?";
+//            String title = "Warning";
+//            int reply = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+//            if (reply == JOptionPane.NO_OPTION) {
+//                return;
+//            }
+//        }
+
         showTableOrderColumn();
         if (!dtmTM.containsKey("t2")) {
             tblOrder.setModel(dtm);
@@ -1007,7 +1025,18 @@ public class RestaurantMain extends javax.swing.JFrame {
             txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
             return;
         }
-        dtm.addRow(o);
+
+        boolean isDuplicated = false;
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            if (dtm.getValueAt(i, 0).toString().trim() == food.getFoodName().trim()) {
+                dtm.setValueAt(Integer.parseInt(dtm.getValueAt(i, 1).toString()) + 1, i, 1);
+                isDuplicated = true;
+                break;
+            }
+        }
+        if (isDuplicated == false) {
+            dtm.addRow(o);
+        }
         tblOrder.setModel(dtm);
         txtOriginalPrice.setText(Double.toString(getOriginalPrice()));
     }
